@@ -17,7 +17,7 @@ const App = () => {
 
     cookie.set('count', count, {
       path: '/',
-      domain: 'http://localhost:5000'
+      domain: 'https://microfronted-test-pojects-home.vercel.app'
     });
     console.log(cookie.get('count'))
 
