@@ -13,13 +13,14 @@ const App = () => {
   const { count, increment, decrement } = useStore();
 
   useEffect(()=> {
-    const cookie = new Cookies();
+    // const cookie = new Cookies();
 
-    cookie.set('count', count, {
-      path: '/',
-      domain: 'https://microfronted-test-pojects-home.vercel.app'
-    });
-    console.log(cookie.get('count'))
+    // cookie.set('count', count, {
+    //   path: '/',
+    //   domain: 'microfronted-test-pojects-home.vercel.app'
+    // });
+    // console.log(cookie.get('count'))
+    document.cookie = `count=${count};max-age=604800;microfronted-test-pojects-home.vercel.app`
 
   }, [count]);
   
