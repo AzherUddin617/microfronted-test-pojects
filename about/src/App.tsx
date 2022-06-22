@@ -20,7 +20,7 @@ const App = () => {
     //   domain: 'microfronted-test-pojects-home.vercel.app'
     // });
     // console.log(cookie.get('count'))
-    document.cookie = `count=${count};max-age=604800;microfronted-test-pojects-home.vercel.app`
+    document.cookie = `count=${count};max-age=604800;vercel.app`
 
   }, [count]);
   
