@@ -44,8 +44,10 @@ module.exports = {
             name: "home",
             filename: "remoteEntry.js",
             remotes: {
-                about: "about@https://microfronted-test-pojects-about.vercel.app/remoteEntry.js",
-                store: "store@https://microfronted-test-pojects-store.vercel.app/remoteEntry.js",
+                // about: "about@https://microfronted-test-pojects-about.vercel.app/remoteEntry.js",
+                // store: "store@https://microfronted-test-pojects-store.vercel.app/remoteEntry.js",
+                about: "about@http://localhost:5001/remoteEntry.js",
+                store: "store@http://localhost:5002/remoteEntry.js",
             },
             exposes: {
                 "./Header": "./src/components/header.tsx",

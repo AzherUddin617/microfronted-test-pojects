@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Cookies from 'universal-cookie';
 
@@ -9,29 +9,51 @@ import Footer from 'home/Footer';
 
 import { StoreProvider, useStore } from 'store/store';
 
+
 const App = () => {
-  const { count, increment, decrement } = useStore();
-
+  const { count, increment, decrement, incrementByAmount } = useStore();
+  
   useEffect(()=> {
-    // const cookie = new Cookies();
+    const cookie = new Cookies();
+    // cookie.addChangeListener(({name, value})=> {
+    //   console.log(name, value, ":about");
+    // })
 
-    // cookie.set('count', count, {
-    //   path: '/',
-    //   domain: 'microfronted-test-pojects-home.vercel.app'
-    // });
-    // console.log(cookie.get('count'))
-    document.cookie = `count=${count};max-age=604800;vercel.app`
+    const interval = setInterval(()=> {
+      const newCount = cookie.get('count');
 
-  }, [count]);
+      if (count < newCount) increment();
+      else if (count > newCount) decrement();
+
+    }, 1000);
+
+    return ()=>{
+      clearInterval(interval);
+    }
+  }, [count])
+
+  const handleCountChange = (newCount: number) => {
+    const cookie = new Cookies();
+
+    cookie.set('count', newCount.toString(), {
+      domain: 'localhost'
+    })
+
+    if (count < newCount) {
+      increment();
+    } else {
+      decrement();
+    }
+  }
   
   return (
     <div className="mt-10 text-3xl mx-auto max-w-6xl">
       <Header no={2} />
       <div>Name: About</div>
-      <div>Count: {count}</div>
-      <button className="bg-green-500" onClick={increment}>Increment</button>
+      <div className="text-red-600">Count: {count}</div>
+      <button className="bg-green-500" onClick={()=> handleCountChange(count+1)}>Increment</button>
       <br/>
-      <button className="bg-red-500" onClick={decrement}>Decrement</button>
+      <button className="bg-red-500" onClick={()=> handleCountChange(count-1)}>Decrement</button>
       <Footer />
     </div>
   );
